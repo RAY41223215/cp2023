@@ -602,8 +602,69 @@
 <p><br/> }</p>
 <p>交點: (388.90, 55.10)<br/>交點: (155.10, 288.90)<br/>交點: (449.72, 119.47)<br/>交點: (130.07, 204.72)</p>
 <h1>C_EX</h1>
+<p>1.#include &lt;stdio.h&gt;<br/>void main()<br/>{<br/>int a;<br/>a = 3;<br/>printf("%d\n", !a );<br/>a = 0;<br/>printf("%d\n", !a );<br/>}</p>
+<p><img alt="" height="122" src="/images/螢幕擷取畫面 2023-12-26 203456.png" width="433"/></p>
+<p>2.#include &lt;stdio.h&gt;<br/>void main()<br/>{<br/>printf("%d\n", 1 &amp;&amp; 3 );<br/>printf("%d\n", 0 &amp;&amp; 0 );<br/>printf("%d\n", 2 &amp;&amp; 2 );<br/>}</p>
+<p><img alt="" height="142" src="/images/螢幕擷取畫面 2023-12-26 203645.png" width="425"/></p>
+<p>3.</p>
+<div class="line number1 index0 alt2"><code class="cpp preprocessor">#include &lt;stdio.h&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="cpp keyword bold">void</code> <code class="cpp plain">main()</code></div>
+<div class="line number3 index2 alt2"><code class="cpp plain">{</code></div>
+<div class="line number4 index3 alt1"><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"%d\n"</code><code class="cpp plain">, 1 || 0 );</code></div>
+<div class="line number5 index4 alt2"><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"%d\n"</code><code class="cpp plain">, 0 || 0 );</code></div>
+<div class="line number6 index5 alt1"><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"%d\n"</code><code class="cpp plain">, 2 || 2 );</code></div>
+<div class="line number7 index6 alt2"><code class="cpp plain">}</code></div>
+<div class="line number7 index6 alt2"><code class="cpp plain"><img alt="" height="142" src="/images/螢幕擷取畫面 2023-12-26 203645.png" width="425"/></code></div>
+<div class="line number7 index6 alt2"><code class="cpp plain">4.</code></div>
+<div class="line number7 index6 alt2"><code class="cpp plain">#include &lt;stdio.h&gt;<br/>void main()<br/>{<br/>char a;<br/>printf( " The size of int is %d \n", sizeof(int) );<br/>printf( " The size of char a is %d \n", sizeof(a) );<br/>}</code></div>
+<div class="line number7 index6 alt2"><code class="cpp plain"><img alt="" height="100" src="/images/螢幕擷取畫面 2023-12-26 204121.png" width="419"/></code></div>
+<div class="line number7 index6 alt2"><code class="cpp plain">5.</code></div>
+<div class="line number7 index6 alt2">
+<div class="line number1 index0 alt2"><code class="cpp preprocessor">#include &lt;stdio.h&gt;</code></div>
+<div class="line number2 index1 alt1"> </div>
+<div class="line number3 index2 alt2"><code class="cpp color1 bold">int</code> <code class="cpp plain">main() {</code></div>
+<div class="line number4 index3 alt1"><code class="cpp spaces">    </code><code class="cpp color1 bold">char</code> <code class="cpp plain">ch; </code></div>
+<div class="line number5 index4 alt2"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"input a char: "</code><code class="cpp plain">);</code></div>
+<div class="line number6 index5 alt1"><code class="cpp spaces">    </code><code class="cpp functions bold">scanf</code><code class="cpp plain">(</code><code class="cpp string">"%c"</code><code class="cpp plain">, &amp;ch);</code></div>
+<div class="line number7 index6 alt2"><code class="cpp spaces">    </code><code class="cpp keyword bold">if</code> <code class="cpp plain">(ch == </code><code class="cpp string">'a'</code><code class="cpp plain">) {</code></div>
+<div class="line number8 index7 alt1"><code class="cpp spaces">        </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"You pressed 'a'\n"</code><code class="cpp plain">);</code></div>
+<div class="line number9 index8 alt2"><code class="cpp spaces">    </code><code class="cpp plain">}</code></div>
+<div class="line number10 index9 alt1"><code class="cpp spaces">    </code><code class="cpp keyword bold">return</code> <code class="cpp plain">0;</code></div>
+<div class="line number11 index10 alt2"><code class="cpp plain">}</code></div>
+<div class="line number11 index10 alt2"><code class="cpp plain"><img alt="" height="83" src="/images/螢幕擷取畫面 2023-12-26 204314.png" width="395"/></code></div>
+<div class="line number11 index10 alt2"><code class="cpp plain">6.</code></div>
+<div class="line number11 index10 alt2"><code class="cpp plain"><code class="cpp plain"></code></code>
+<div class="line number1 index0 alt2"><code class="cpp preprocessor"></code></div>
+#include &lt;stdio.h&gt;<br/><br/>int main() {<br/> char ch; // 宣告一個字符型變數 ch<br/><br/> // 提示用戶輸入一個字符<br/> printf("輸入一個字符：");<br/><br/> // 檢查 scanf 的返回值，確保成功讀取了一個字符<br/> if (scanf("%c", &amp;ch) != 1) {<br/> fprintf(stderr, "錯誤：無法讀取字符。\n");<br/> return 1; // 返回錯誤碼<br/> }<br/><br/> // 檢查輸入的字符是否為 'a'<br/> if (ch == 'a') {<br/> printf("你輸入的是 'a'\n"); // 如果是 'a'，則印出相應的消息<br/> } else {<br/> printf("你輸入的不是 'a'\n"); // 如果不是 'a'，則印出相應的消息<br/> }<br/><br/> return 0;<br/>}</div>
+<div class="line number11 index10 alt2"><img alt="" height="259" src="/images/螢幕擷取畫面 2023-12-26 204548.png" width="431"/></div>
+<div class="line number11 index10 alt2">7.</div>
+<div class="line number11 index10 alt2">#include &lt;stdio.h&gt;<br/><br/>int main() {<br/> int i; // 宣告一個整數變數 i<br/><br/> // 提示用戶輸入一個整數<br/> printf("輸入一個整數：");<br/><br/> // 檢查 scanf 的返回值，確保成功讀取了一個整數<br/> if (scanf("%d", &amp;i) != 1) {<br/> fprintf(stderr, "錯誤：無法讀取整數。\n");<br/> return 1; // 返回錯誤碼<br/> }<br/><br/> // 根據 i 的值進行不同的判斷<br/> if (i &lt; 100) {<br/> printf("i &lt; 100\n");<br/> } else {<br/> if ((i &gt;= 100) &amp;&amp; (i &lt; 200)) {<br/> printf("i &gt;= 100 and i &lt; 200\n");<br/> } else {<br/> printf("i &gt;= 200\n");<br/> }<br/> }<br/><br/> return 0;<br/>}</div>
+</div>
+<p><img alt="" height="304" src="/images/螢幕擷取畫面 2023-12-26 204836.png" width="399"/></p>
+<p>8.</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>int main() {<br/> char c; // 宣告一個字符型變數 c</p>
+<p>// 提示用戶輸入一個字符<br/> printf("輸入一個字符：");</p>
+<p>// 檢查 scanf 的返回值，確保成功讀取了一個字符<br/> if (scanf(" %c", &amp;c) != 1) {<br/> fprintf(stderr, "錯誤：無法讀取字符。\n");<br/> return 1; // 返回錯誤碼<br/> }</p>
+<p>// 使用 switch 陳述式根據讀取的字符執行相應的分支<br/> switch(c) {<br/> case 'a':<br/> printf("你按下了 'a'\n");<br/> break;<br/> case 'b':<br/> printf("你按下了 'b'\n");<br/> break;<br/> case 'c':<br/> printf("你按下了 'c'\n");<br/> break;<br/> default:<br/> printf("不是 'a'、'b' 或 'c'\n");<br/> break;<br/> }</p>
+<p>return 0;<br/>}</p>
+<p><img alt="" height="175" src="/images/螢幕擷取畫面 2023-12-26 205204.png" width="419"/></p>
+<p>9.</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>int main() {<br/> char c; // 宣告一個字符型變數 c</p>
+<p>// 提示用戶輸入一個字符<br/> printf("輸入一個字符：");</p>
+<p>// 檢查 scanf 的返回值，確保成功讀取了一個字符<br/> if (scanf(" %c", &amp;c) != 1) {<br/> fprintf(stderr, "錯誤：無法讀取字符。\n");<br/> return 1; // 返回錯誤碼<br/> }</p>
+<p>// 使用 switch 陳述式根據讀取的字符執行相應的分支<br/> switch(c) {<br/> case 'a':<br/> printf("你按下了 'a'\n");<br/> break;<br/> case 'b':<br/> printf("你按下了 'b'\n");<br/> break;<br/> case 'c':<br/> printf("你按下了 'c'\n");<br/> break;<br/> default:<br/> printf("不是 'a'、'b' 或 'c'\n");<br/> break;<br/> }</p>
+<p>return 0;<br/>}</p>
+<p><img alt="" height="364" src="/images/螢幕擷取畫面 2023-12-26 205424.png" width="460"/></p>
+<p>10.</p>
+<p>#include&lt;stdio.h&gt;</p>
+<p>void main() {<br/> int i;<br/> for (i = 0; i &lt; 6; i++) {<br/> printf("%d\n", i); /* 印出 i */<br/> }<br/>}</p>
+<p><img alt="" height="235" src="/images/螢幕擷取畫面 2023-12-26 205537.png" width="431"/></p>
+<h4><span></span></h4>
 <p></p>
 <h1>ANSIC</h1>
+<p></p>
 <p>1.</p>
 <p>#include &lt;stdio.h&gt;</p>
 <p>int main() <br/>{<br/> // Print Name<br/> printf("Name : Alexandra Abramov\n");</p>
