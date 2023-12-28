@@ -1215,7 +1215,30 @@ circleLineIntersection(circle_x, circle_y, radius, x6, y6, x5, y5);
 }</pre>
 <p><br/><br/></p>
 <p>交點: (388.90, 55.10)<br/>交點: (155.10, 288.90)<br/>交點: (449.72, 119.47)<br/>交點: (130.07, 204.72)</p>
+<h1>week16</h1>
+<div class="line number1 index0 alt2">
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+ 
+int main() {
+    FILE *gnuplotPipe = popen("gnuplot", "w");
+    if (gnuplotPipe) {
+        fprintf(gnuplotPipe, "set terminal png\n");
+        fprintf(gnuplotPipe, "set output 'motion_plot.png'\n");
+        fprintf(gnuplotPipe, "set xlabel 'Time'\n");
+        fprintf(gnuplotPipe, "set ylabel 'Position / Velocity'\n");
+        fprintf(gnuplotPipe, "plot 'motion_data.txt' using 1:2 with lines title 'm1 position', 'motion_data.txt' using 1:3 with lines title 'm2 position', 'motion_data.txt' using 1:4 with lines title 'm1 velocity', 'motion_data.txt' using 1:5 with lines title 'm2 velocity'\n");
+        fprintf(gnuplotPipe, "exit\n");
+        fflush(gnuplotPipe);
+        pclose(gnuplotPipe);
+    } else {
+        printf("Error opening pipe to Gnuplot.\n");
+    }
+    return 0;
+}</pre>
+<p><img alt="" height="225" src="/images/motion_plot.png" width="300"/></p>
+</div>
 <h1>C_EX</h1>
+<p></p>
 <p>1.#include &lt;stdio.h&gt;<br/>void main()<br/>{<br/>int a;<br/>a = 3;<br/>printf("%d\n", !a );<br/>a = 0;<br/>printf("%d\n", !a );<br/>}</p>
 <p><img alt="" height="122" src="/images/螢幕擷取畫面 2023-12-26 203456.png" width="433"/></p>
 <p>2.#include &lt;stdio.h&gt;<br/>void main()<br/>{<br/>printf("%d\n", 1 &amp;&amp; 3 );<br/>printf("%d\n", 0 &amp;&amp; 0 );<br/>printf("%d\n", 2 &amp;&amp; 2 );<br/>}</p>
