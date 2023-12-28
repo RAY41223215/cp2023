@@ -1,89 +1,85 @@
+// https://en.wikipedia.org/wiki/Flag_of_the_Republic_of_China
+// 內政部國旗參考資料: https://www.moi.gov.tw/cp.aspx?n=10621
+// cc roc_flag_in_gd.c -lgd -lm to link with gd and math library
+// https://www.rapidtables.com/web/color/RGB_Color.html
+// 幾何形狀著色與繪圖練習
+// 以下 gd 繪圖程式嘗試畫出 ROC 國旗, 請根據下列程式內容完成後續的國旗繪圖
 #include <stdio.h>
-#include <string.h>
+#include <gd.h>
+#include <math.h>
+
+void draw_roc_flag(gdImagePtr img);
+void draw_white_sun(gdImagePtr img, int x, int y, int size, int color);
 
 int main() {
-    // Open the user file for reading
-    FILE* user_file = fopen("2b_user_list.txt", "r");
-    if (user_file == NULL) {
-        perror("Error opening user file");
+    // width 3: height 2
+    int width = 1200;
+    // 國旗長寬比為 3:2
+    int height = (int)(width*2.0 / 3.0);
+
+    gdImagePtr img = gdImageCreateTrueColor(width, height);
+    gdImageAlphaBlending(img, 0);
+
+    draw_roc_flag(img);
+
+    FILE *outputFile = fopen("roc_flag__gd.png", "wb");
+    if (outputFile == NULL) {
+        fprintf(stderr, "Error opening the output file.\n");
         return 1;
     }
-
-    char line[100]; // Assuming a maximum line length of 100 characters
-
-    char valid_users[100][20]; // Assuming a maximum of 100 valid users with a length of 20 characters each
-    int valid_user_count = 0;
-
-    // Read and store the student numbers from the user file
-    while (fgets(line, sizeof(line), user_file)) {
-        line[strcspn(line, "\n")] = '\0'; // Remove the newline character
-        strcpy(valid_users[valid_user_count], line);
-        valid_user_count++;
-    }
-
-    // Close the user file
-    fclose(user_file);
-
-    // Open the CAD file for reading
-    FILE* cad_file = fopen("cad2023_2b_w8.txt", "r");
-    if (cad_file == NULL) {
-        perror("Error opening CAD file");
-        return 1;
-    }
-
-    char unique_users[100][20]; // Assuming a maximum of 100 unique users with a length of 20 characters each
-    int unique_user_count = 0;
-
-    // Read the CAD file line by line
-    while (fgets(line, sizeof(line), cad_file)) {
-        char* token = strtok(line, " "); // Split the line by space
-        if (token != NULL && strstr(token, "cad") == token) {
-            // Extract the student number (skip "cad")
-            char student_number[20]; // Assuming a maximum length of 20 characters for a student number
-            strcpy(student_number, token + 3); // Skip "cad"
-
-            // Check if the student number is in the list of valid users and not a duplicate
-            int is_valid = 0;
-            for (int i = 0; i < valid_user_count; i++) {
-                if (strcmp(valid_users[i], student_number) == 0) {
-                    is_valid = 1;
-                    break;
-                }
-            }
-
-            // Add the student number to the unique_users list if it's valid and not a duplicate
-            if (is_valid) {
-                int is_duplicate = 0;
-                for (int i = 0; i < unique_user_count; i++) {
-                    if (strcmp(unique_users[i], student_number) == 0) {
-                        is_duplicate = 1;
-                        break;
-                    }
-                }
-
-                if (!is_duplicate) {
-                    strcpy(unique_users[unique_user_count], student_number);
-                    unique_user_count++;
-                }
-            }
-        }
-    }
-
-    // Reverse the order of the unique student numbers
-    for (int i = 0; i < unique_user_count / 2; i++) {
-        char temp[20];
-        strcpy(temp, unique_users[i]);
-        strcpy(unique_users[i], unique_users[unique_user_count - 1 - i]);
-        strcpy(unique_users[unique_user_count - 1 - i], temp);
-    }
-
-    // Print the unique student numbers in reverse order
-    for (int i = 0; i < unique_user_count; i++) {
-        printf("%s\n", unique_users[i]);
-    }
-
-    // Close the CAD file
-    fclose(cad_file);
-
+    gdImagePngEx(img, outputFile, 9);
+    fclose(outputFile);
+    gdImageDestroy(img);
     return 0;
+}
+
+void draw_roc_flag(gdImagePtr img) {
+    int width = gdImageSX(img);
+    int height = gdImageSY(img);
+    int red, white, blue;
+    // 白日位於青天面積正中央, 因此中心點座標為長寬各 1/4 處
+    int center_x = (int)(width/4);
+    int center_y = (int)(height/4);
+    // gdImageFilledEllipse 需以長寬方向的 diameter 作圖
+    // 由於中央白日圓形的半徑為青天寬度的 1/8
+    // 因此中央白日圓形的直徑為青天寬度的 1/4, 也就是國旗寬度的 1/8
+    // 而且白日十二道光芒的外圍圓形其半徑也是國旗寬度的1/8
+    int sun_radius = (int)(width/8);
+    // 中央白日圓形的直徑等於十二道光芒外圍圓形的半徑
+    int white_circle_dia = sun_radius;
+    // 中央藍色圓形半徑為中央白日的 1又 2/15
+    int blue_circle_dia = white_circle_dia +  white_circle_dia*2/15;
+    // 根據 https://www.moi.gov.tw/cp.aspx?n=10621 訂定國旗三種顏色值
+    red = gdImageColorAllocate(img, 255, 0, 0); // 紅色
+    white = gdImageColorAllocate(img, 255, 255, 255); // 白色
+    blue = gdImageColorAllocate(img, 0, 0, 149); // 藍色
+    // 根據畫布大小塗上紅色長方形區域
+    gdImageFilledRectangle(img, 0, 0, width, height, red);
+    // 青天面積為整面國旗的 1/4, 也是採用長方形塗色
+    gdImageFilledRectangle(img, 0, 0, (int)(width/2.0), (int)(height/2.0), blue);
+  {int x1 = 429;
+   int y1 = 125;
+   int x2 = 279;
+   int y2 = 165;
+
+   // 畫一條線連接兩個點
+   gdImageLine(img, x1, y1, x2, y2, white);
+  }
+  {int x1 = 170;
+     int y1 = 274;
+     int x2 = 279;
+     int y2 = 165;
+
+     // 畫一條線連接兩個點
+     gdImageLine(img, x1, y1, x2, y2, white);
+  }
+  {
+    int x1 = 170;
+     int y1 = 274;
+     int x2 = 429;
+     int y2 = 125;
+
+     // 畫一條線連接兩個點
+     gdImageLine(img, x1, y1, x2, y2, white);
+  }
 }
